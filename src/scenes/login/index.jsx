@@ -49,7 +49,7 @@ const Login = () => {
   return (
     
     <Box m="20px">
-      <Header title="CREATE USER" subtitle="Create a New User Profile" />
+      <Header title="LOGIN PAGE" subtitle="SIGN IN" />
 
     
           <form onSubmit={handleSubmit} >

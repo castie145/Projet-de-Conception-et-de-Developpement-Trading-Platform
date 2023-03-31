@@ -15,16 +15,24 @@ import { ColorModeContext, useMode } from "./theme";
 import Calendar from "./scenes/calendar/calendar";
 import Login from "./scenes/login";
 import Register from "./scenes/register";
+import { useLocation } from "react-router-dom";
 
 function App() {
   const [theme, colorMode] = useMode();
   const [isLoggedIn, setIsLoggedIn] = useState(true);
   const [isSidebar, setIsSidebar] = useState(true);
+  const location = useLocation();
 
-  const handleLogin = () => {
+  const handleLogin = (username) => {
+    setLoggedInUser(username);
     setIsLoggedIn(false);
     setIsSidebar(false);
   };
+  const [loggedInUser, setLoggedInUser] = useState('');
+
+  // Function to handle login
+  
+  
 
   const handleLogout = () => {
     setIsLoggedIn(false);
@@ -35,9 +43,9 @@ function App() {
       <ThemeProvider theme={theme}>
         <CssBaseline />
         <div className="app">
-          {isLoggedIn && <Sidebar isSidebar={isSidebar} />}
+          {isLoggedIn && location.pathname !== "/" && <Sidebar isSidebar={isSidebar} />}
           <main className="content">
-            {isLoggedIn && (
+            {isLoggedIn && location.pathname !== "/" && (
               <Topbar
                 setIsSidebar={setIsSidebar}
                 handleLogout={handleLogout}
@@ -62,5 +70,6 @@ function App() {
     </ColorModeContext.Provider>
   );
 }
+
 
 export default App;
